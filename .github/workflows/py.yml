@@ -1,13 +1,12 @@
-name: node app to docker
+name: python app to docker
 
 on:
   push:
     branches: [main]
     paths:
-      - "docker/app1-hello/node/**"
+      - "docker/app2-hello/python/**"
   pull_request:
     branches: [main]
-  workflow_dispatch:
 
 jobs:
   build:
@@ -17,20 +16,21 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v6
 
-      - name: setup node.js
-        uses: actions/setup-node@v6
+      - name: setup python
+        uses: actions/setup-python@v6
         with:
-          node-version: "24"
+          python-version: "3.12"
 
       - name: install dependencies
-        working-directory: docker/app1-hello/node
+        working-directory: docker/app2-hello/python
         run: |
-          npm install
+          python -m pip install -r --upgrade pip
+          pip install -r requirements.txt
 
-      - name: run tests (if any)
-        working-directory: docker/app1-hello/node
+      - name: run smoke tests (if any)
+        working-directory: docker/app2-hello/python
         run: |
-          npm test --if-present
+          python -m py_compile -m main.py
 
   docker-build:
     runs-on: ubuntu-latest
@@ -49,7 +49,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v7
         with:
-          context: docker/app1-hello/node
+          context: docker/app2-hello/python
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/hello-node:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/hello-python:latest
