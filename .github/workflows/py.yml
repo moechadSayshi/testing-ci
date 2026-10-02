@@ -30,7 +30,7 @@ jobs:
       - name: run smoke tests (if any)
         working-directory: docker/app1-hello/python
         run: |
-          python -m py_compile -m main.py
+          python -m py_compile main.py
 
   docker-build:
     runs-on: ubuntu-latest
