@@ -1,10 +1,13 @@
-name: CI
+name: node app to docker
 
 on:
   push:
     branches: [main]
+    paths:
+      - "docker/app1-hello/node/**"
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   build:
