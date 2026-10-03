@@ -80,4 +80,4 @@ jobs:
       - name: deploy to eks
         run: |
 
-          kubectl apply -f docker/app1-hello/python/k8s/deployment.yaml
+          kubectl apply -f docker/app1-hello/python/k8s/deployment.yml
