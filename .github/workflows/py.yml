@@ -1,4 +1,4 @@
-name: python app to docker
+name: python app to docker to eks
 
 on:
   push:
