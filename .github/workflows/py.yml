@@ -62,7 +62,6 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v6
 
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v6.3.0
         with:
@@ -73,11 +72,12 @@ jobs:
       - name: setup kubectl
         uses: azure/setup-kubectl@v4
         with:
-          version: 'latest'
+          version: "latest"
       - name: update kubeconfig
         run: |
           aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ap-south-1
 
       - name: deploy to eks
         run: |
-        kubectl apply -f docker/app1-hello/python/k8s/deployment.yaml
+
+          kubectl apply -f docker/app1-hello/python/k8s/deployment.yaml
