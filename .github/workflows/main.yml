@@ -1,4 +1,4 @@
-name: node app to docker
+name: node app to docker to eks
 
 on:
   push:
@@ -80,4 +80,4 @@ jobs:
       - name: deploy to eks
         run: |
 
-          kubectl apply -f docker/app1-hello/python/k8s/deployment.yml
+          kubectl apply -f docker/app1-hello/node/k8s/deployment.yml
