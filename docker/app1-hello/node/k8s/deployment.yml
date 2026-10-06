@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: python-deployment
+  name: node-deployment
 
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: python-app
+      app: node-app
   template:
     metadata:
       labels:
-        app: python-app
+        app: node-app
     spec:
       containers:
         - name: hello
@@ -26,11 +26,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: python-service
+  name: node-service
 spec:
   type: LoadBalancer
   selector:
-    app: python-app
+    app: node-app
   ports:
     - protocol: TCP
       port: 3000
